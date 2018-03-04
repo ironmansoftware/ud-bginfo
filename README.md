@@ -1,6 +1,10 @@
 # UDBGInfo
 
-Web-based [BGInfo](https://docs.microsoft.com/en-us/sysinternals/downloads/bginfo) built on Universal Dashboard
+Web-based [BGInfo](https://docs.microsoft.com/en-us/sysinternals/downloads/bginfo) built on [Universal Dashboard](https://ironmansoftware.com/universal-dashboard).
+
+- Lightweight 
+- Access from anywhere 
+- Updates every 60 seconds
 
 ## Overview
 
