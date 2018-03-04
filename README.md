@@ -6,6 +6,10 @@ Web-based [BGInfo](https://docs.microsoft.com/en-us/sysinternals/downloads/bginf
 - Access from anywhere 
 - Updates every 60 seconds
 
+```
+Install-Module 'ud-bginfo'
+```
+
 ## Overview
 
 Basics about a machine. OS version, logon information and boot time.  
