@@ -69,10 +69,8 @@ function New-HardwareCard {
     $CPU = Get-WMIObject -Class Win32_Processor
     $drives = Get-WMIObject -Class win32_diskdrive
 
-    $temps = Get-WMIObject MSAcpi_ThermalZoneTemperature -Namespace "root/wmi"
-    $temps = $temps | Select-Object -Property InstanceName,@{n="CurrentTemp";e={ConvertTo-Fahrenheit $_.currenttemperature}},@{n="MaxTemp";e={ConvertTo-Fahrenheit $_.CriticalTripPoint}}
 
-    New-UDCard -Title "Hardware" -Watermark desktop -Content {
+    New-UDCard -Title "Hardware" -Content {
         New-UDLayout -Columns 1 -Content {
             New-UDElement -Tag "div" -Content {
                 "  CPU: $($CPU.Name)"
@@ -82,9 +80,6 @@ function New-HardwareCard {
                     "  Drive: $($drive.caption)"
                 }
             }
-            foreach($temp in $temps) {
-                New-UDProgressMetric -Total $temp.MaxTemp -Value $temp.CurrentTemp -Metric "F" -Label "$($temp.InstanceName) - Temperature (F)"
-            }
         }
     }
 }
@@ -93,7 +88,7 @@ function New-OverviewCard {
     $OS = Get-WMIObject -Class Win32_OperatingSystem
     
     
-    New-UDCard -Title "$Env:ComputerName Overview" -Watermark book -Content {
+    New-UDCard -Title "$Env:ComputerName Overview" -Content {
         New-UDLayout -Columns 1 -Content {
             New-UDElement -Tag "div" -Content {
                 "  Boot Time: $($OS.ConvertToDateTime($OS.LastBootupTime))"
@@ -121,7 +116,7 @@ function New-NetworkCard {
     $IPAddress = $EnabledAdapters.IPAddress | Where-Object { -not [String]::IsNullOrEmpty($_)}
     $DNSServer = $EnabledAdapters.DNSServerSearchOrder | Where-Object { -not [String]::IsNullOrEmpty($_)}
 
-    New-UDCard -Title "Network" -Watermark plug -Content {
+    New-UDCard -Title "Network" -Content {
         New-UDLayout -Columns 1 -Content {
             New-UDElement -Tag "div" -Content {
                 $IPAddress = [String]::Join(', ', $IPAddress)
@@ -145,7 +140,7 @@ function New-NetworkCard {
 function New-StorageCard {
     $Disks = Get-WMIObject -Class Win32_LogicalDisk
 
-    New-UDCard -Title 'Storage' -Watermark hdd_o -Content {
+    New-UDCard -Title 'Storage' -Content {
         foreach($disk in $disks) {
             New-UDElement -Tag "row" -Content {
                 New-UDProgressMetric -Value ($Disk.FreeSpace /1GB) -Total ($Disk.Size / 1GB) -Metric "GBs" -Label "$($Disk.DeviceID) - Free Space" -HighIsGood

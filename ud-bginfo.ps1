@@ -4,7 +4,7 @@ Import-Module (Join-Path $PSScriptRoot 'ud-bginfo.psm1') -Force
 
 $LoadModule = "Import-Module $PSScriptRoot\ud-bginfo.psm1"
 $Content =  {
-    New-UDRow -Columns {
+    New-UDRow -Endpoint {
         New-UDColumn -Size 6 -Content {
             New-OverviewCard
         }
@@ -12,7 +12,7 @@ $Content =  {
             New-StorageCard
         } 
     } -AutoRefresh -RefreshInterval 60
-    New-UDRow -Columns {
+    New-UDRow -Endpoint {
         New-UDColumn -Size 6 -Content {
             New-HardwareCard
         }
