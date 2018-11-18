@@ -2,7 +2,6 @@ Get-UDDashboard | Stop-UDDashboard
 
 Import-Module (Join-Path $PSScriptRoot 'ud-bginfo.psm1') -Force
 
-$LoadModule = "Import-Module $PSScriptRoot\ud-bginfo.psm1"
 $Content =  {
     New-UDRow -Endpoint {
         New-UDColumn -Size 6 -Content {
@@ -22,7 +21,9 @@ $Content =  {
     } -AutoRefresh -RefreshInterval 60
 }
 
+$EndpointInitialization = New-UDEndpointInitialization -Module "$PSScriptRoot\ud-bginfo.psm1"
 
-$Dashboard = New-UDDashboard -Title "$env:ComputerName - BGINFO" -Content $Content -EndpointInitializationScript ([ScriptBlock]::Create($LoadModule))
+
+$Dashboard = New-UDDashboard -Title "$env:ComputerName - BGINFO" -Content $Content -EndpointInitialization $EndpointInitialization
 
 Start-UDDashboard -Port 10000 -Dashboard $Dashboard
