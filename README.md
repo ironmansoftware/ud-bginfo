@@ -1,4 +1,4 @@
-# UDBGInfo
+# UDBGInfo - [Marketplace](https://ironmansoftware.com/product/ud-bginfo/)
 
 Web-based [BGInfo](https://docs.microsoft.com/en-us/sysinternals/downloads/bginfo) built on [Universal Dashboard](https://ironmansoftware.com/universal-dashboard).
 
