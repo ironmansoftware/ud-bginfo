@@ -138,7 +138,7 @@ function New-NetworkCard {
 }
 
 function New-StorageCard {
-    $Disks = Get-WMIObject -Class Win32_LogicalDisk
+    $Disks = Get-WMIObject -Class Win32_LogicalDisk | Where {$_.DriveType -ne "5"}
 
     New-UDCard -Title 'Storage' -Content {
         foreach($disk in $disks) {
